@@ -18,3 +18,5 @@ while 1:
         break
 
     print(eratosthenes[n+1:2*n+1].count(0))
+
+# Befor inputting numbers, making a cieve of Eratosthenes makes program running faster.
