@@ -13,24 +13,34 @@ def drawing(N):
             if i == 0:
                 ret += [2 * "*" * (plus_length + 1) + start]
             elif 0 < i < len(tmp) + 1:
-                ret += [" " * i + "*" + " " * (plus_length - i) + tmp[i - 1] + " " * (plus_length - i) + "*" + " " * i]
+                tmp_cnt = 0
+                for elem in tmp[i - 1]:
+                    if elem == "*":
+                        break
+                    tmp_cnt += 1
+                ret += [" " * i + "*" + " " * (plus_length - i) + tmp[i - 1] + " " * tmp_cnt + " " * (plus_length - i) + "*"]
             elif len(tmp) < i < len(tmp) * 2:
-                ret += [" " * i + "*" + " " * cnt + "*" + " " * i]
+                ret += [" " * i + "*" + " " * cnt + "*"]
                 cnt -= 2
             else:
-                ret += [" " * i + "*" + " " * i]
+                ret += [" " * i + "*"]
     else:
         start = tmp[0]
         plus_length = len(tmp)
         cnt = 1
         for i in range(len(tmp) * 2, -1, -1):
             if i == len(tmp) * 2:
-                ret += [" " * i + "*" + " " * i]
+                ret += [" " * i + "*"]
             elif len(tmp) < i < len(tmp) * 2:
-                ret += [" " * i + "*" + " " * cnt + "*" + " " * i]
+                ret += [" " * i + "*" + " " * cnt + "*"]
                 cnt += 2
             elif 0 < i < len(tmp) + 1:
-                ret += [" " * i + "*" + " " * (plus_length - i) + tmp[len(tmp) - i] + " " * (plus_length - i) + "*" + " " * i]
+                tmp_cnt = 0
+                for elem in tmp[len(tmp) - i]:
+                    if elem == "*":
+                        break
+                    tmp_cnt += 1
+                ret += [" " * i + "*" + " " * (plus_length - i) + tmp[len(tmp) - i] + " " * tmp_cnt + " " * (plus_length - i) + "*"]
             else:
                 ret += [2 * "*" * (plus_length + 1) + start]
     return ret
