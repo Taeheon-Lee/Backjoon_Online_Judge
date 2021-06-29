@@ -1,34 +1,30 @@
 "Question 9997"
 
-def check(string):
-    tmp = [0] * 26
-    for elem in string:
-        tmp[ord(elem)-ord('a')] += 1
-        if 0 not in tmp:
-            return True
-    return False
+# passed with pypy3
 
 def make_sentance(string, cnt, k, sign):
     global answer
     if cnt > 0:
         if sign == 1:
             answer += 1
-        elif check(string) is True:
+        elif alpha == string:
             answer += 1
             sign = 1
     for i in range(k, len(lst)):
-        back = string[:]
-        string += lst[i]
-        make_sentance(string, cnt + 1, i + 1, sign)
-        string = back
+        make_sentance(string | lst[i], cnt + 1, i + 1, sign)
         cnt = 0
         sign = 0
 
 N = int(input())
 lst = []
 answer = 0
+alpha = (1 << 26) - 1
 for _ in range(N):
-    lst.append(input())
+    word = input()
+    tmp = 0
+    for elem in word:
+        tmp |= 1 << (ord(elem) - ord('a'))
+    lst.append(tmp)
 lst = list(set(lst))
-make_sentance("", 0, 0, 0)
+make_sentance(0, 0, 0, 0)
 print(answer)
